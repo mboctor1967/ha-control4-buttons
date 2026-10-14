@@ -1,13 +1,17 @@
 {
   "domain": "control4_buttons",
   "name": "Control4 Custom Buttons",
-  "codeowners": ["@mboctor1967"],
+  "codeowners": [
+    "@mboctor1967"
+  ],
   "config_flow": true,
-  "dependencies": ["control4"],
+  "dependencies": [
+    "control4"
+  ],
   "documentation": "https://github.com/mboctor1967/ha-control4-buttons",
   "integration_type": "service",
   "iot_class": "local_push",
   "issue_tracker": "https://github.com/mboctor1967/ha-control4-buttons/issues",
   "requirements": [],
-  "version": "0.1.0"
+  "version": "0.2.0"
 }

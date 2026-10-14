@@ -15,12 +15,40 @@
     "press_custom_button": {
       "name": "Press custom button",
       "description": "Press and release a Control4 custom button.",
-      "fields": {"button_id": {"name": "Button ID", "description": "Custom button ID (shown in the button entity's attributes)."}}
+      "fields": {
+        "button_id": {
+          "name": "Button ID",
+          "description": "Custom button ID (shown in the button entity's attributes)."
+        }
+      }
     },
     "run_macro": {
       "name": "Run macro",
       "description": "Run a Control4 macro.",
-      "fields": {"macro_id": {"name": "Macro ID", "description": "Macro ID (shown in the macro button's attributes)."}}
+      "fields": {
+        "macro_id": {
+          "name": "Macro ID",
+          "description": "Macro ID (shown in the macro button's attributes)."
+        }
+      }
+    },
+    "send_command": {
+      "name": "Send command",
+      "description": "Send any command to a Control4 item (advanced).",
+      "fields": {
+        "item_id": {
+          "name": "Item ID",
+          "description": "Control4 item (device) ID."
+        },
+        "command": {
+          "name": "Command",
+          "description": "Command name, e.g. SHOW_POPUP."
+        },
+        "params": {
+          "name": "Parameters",
+          "description": "Command parameters as a mapping."
+        }
+      }
     }
   }
 }

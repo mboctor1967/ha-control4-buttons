@@ -15,6 +15,7 @@ The Control4 integration (core, or [lawtancool/hass-control4](https://github.com
 ## Services
 - `control4_buttons.press_custom_button` (`button_id`)
 - `control4_buttons.run_macro` (`macro_id`)
+- `control4_buttons.send_command` (`item_id`, `command`, optional `params`): any Control4 command, e.g. wake a touchscreen (`SCREENSAVER_EXIT`) or show a message on it (`SHOW_POPUP` with `MESSAGE`, `SHOWOK`, `DELAY`, `IMGURL`)
 
 IDs are shown in each button entity's attributes.
 

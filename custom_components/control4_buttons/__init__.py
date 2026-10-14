@@ -59,7 +59,16 @@ async def run_macro(hass: HomeAssistant, macro_id: int) -> None:
     _LOGGER.info("Ran Control4 macro %s", macro_id)
 
 
+async def send_command(hass: HomeAssistant, item_id: int, command: str, params: dict | None = None) -> None:
+    """Send any Control4 command to any item (e.g. a touchscreen's SHOW_POPUP or SCREENSAVER_EXIT)."""
+    await get_director(hass).send_post_request(f"/api/v1/items/{item_id}/commands", command, params or {})
+    _LOGGER.info("Sent Control4 %s to item %s", command, item_id)
+
+
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    async def _send(call: ServiceCall) -> None:
+        await send_command(hass, call.data["item_id"], call.data["command"], call.data.get("params"))
+
     async def _press(call: ServiceCall) -> None:
         await press_custom_button(hass, call.data["button_id"])
 
@@ -70,11 +79,16 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
                                  schema=vol.Schema({vol.Required("button_id"): cv.positive_int}))
     hass.services.async_register(DOMAIN, "run_macro", _macro,
                                  schema=vol.Schema({vol.Required("macro_id"): cv.positive_int}))
+    hass.services.async_register(DOMAIN, "send_command", _send, schema=vol.Schema({
+        vol.Required("item_id"): cv.positive_int,
+        vol.Required("command"): cv.string,
+        vol.Optional("params"): dict,
+    }))
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     return True
 
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    for service in ("press_custom_button", "run_macro"):
+    for service in ("press_custom_button", "run_macro", "send_command"):
         hass.services.async_remove(DOMAIN, service)
     return await hass.config_entries.async_unload_platforms(entry, PLATFORMS)
