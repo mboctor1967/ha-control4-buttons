@@ -1,0 +1,26 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Control4 Custom Buttons",
+        "description": "Adds a button for every Control4 custom button and macro, using your existing Control4 integration."
+      }
+    },
+    "abort": {
+      "already_configured": "Already set up.",
+      "no_control4": "Set up the Control4 integration first."
+    }
+  },
+  "services": {
+    "press_custom_button": {
+      "name": "Press custom button",
+      "description": "Press and release a Control4 custom button.",
+      "fields": {"button_id": {"name": "Button ID", "description": "Custom button ID (shown in the button entity's attributes)."}}
+    },
+    "run_macro": {
+      "name": "Run macro",
+      "description": "Run a Control4 macro.",
+      "fields": {"macro_id": {"name": "Macro ID", "description": "Macro ID (shown in the macro button's attributes)."}}
+    }
+  }
+}
